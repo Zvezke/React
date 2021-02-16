@@ -2,8 +2,7 @@ import React from "react";
 import { CardList } from "./components/card-list/card-list.component";
 import "./App.css";
 import { Component } from "react";
-import { SearchBox } from "./components/search-box/search-box.component.jsx";
-import { Btn } from "./components/btn/btn.components";
+import { SearchBox } from "./components/search-box/search-box.component";
 
 class App extends Component {
   constructor() {
@@ -20,12 +19,6 @@ class App extends Component {
     );
   }
 
-  handleChange = (e) => {
-    this.setState({ searchField: e.target.value });
-  };
-
-  handleClick = (e) => console.log(e);
-
   render() {
     const { api, searchField } = this.state;
     const filteredUsers = api.filter((user) =>
@@ -33,13 +26,13 @@ class App extends Component {
     );
     return (
       <div className="App">
-        <Btn type="button" handleClick={this.handleClick} />
-        {/* <SearchBox */}
-        {/* type="search" */}
-        {/* placeholder="Search Users" */}
-        {/* handleChange={this.handleChange} */}
-        {/* /> */}
-        {/* <CardList api={filteredUsers} /> */}
+        <SearchBox
+          type="search"
+          placeholder="Search user"
+          handleChange={(e) => this.setState({ searchField: e.target.value })}
+        />
+
+        <CardList api={filteredUsers} />
       </div>
     );
   }

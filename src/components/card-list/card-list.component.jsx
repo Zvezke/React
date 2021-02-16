@@ -1,11 +1,12 @@
 import React from "react";
+import { Card } from "../card/card.component";
 import "./card-list.styles.css";
 
 export const CardList = (props) => {
   return (
     <div className="card-list">
       {props.api.map((user) => (
-        <h1 key={user.id}>{user.name}</h1>
+        <Card key={user.id} user={user} />
       ))}
     </div>
   );
