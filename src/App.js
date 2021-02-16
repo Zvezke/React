@@ -20,6 +20,15 @@ class App extends Component {
     );
   }
 
+  // async componentDidMount() {
+  // const users = await fetch("https://reqres.in/api/users");
+  // const data = await users.json();
+  // this.setState({
+  // api: data.data,
+  // });
+  // console.log(this.state.api);
+  // }
+
   handleChange = (e) => {
     this.setState({ searchField: e.target.value });
   };
@@ -31,15 +40,18 @@ class App extends Component {
     const filteredUsers = api.filter((user) =>
       user.name.toLowerCase().includes(searchField.toLowerCase())
     );
+    // const filteredUsers = api;
+    // console.log(filteredUsers);
+
     return (
       <div className="App">
         <Btn type="button" handleClick={this.handleClick} />
-        {/* <SearchBox */}
-        {/* type="search" */}
-        {/* placeholder="Search Users" */}
-        {/* handleChange={this.handleChange} */}
-        {/* /> */}
-        {/* <CardList api={filteredUsers} /> */}
+        <SearchBox
+          type="search"
+          placeholder="Search Users"
+          handleChange={this.handleChange}
+        />
+        <CardList api={filteredUsers} />
       </div>
     );
   }
