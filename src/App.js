@@ -1,9 +1,10 @@
 import React from "react";
-import { CardList } from "./components/card-list/card-list.component";
+// import { CardList } from "./components/card-list/card-list.component";
 import "./App.css";
 import { Component } from "react";
 import { SearchBox } from "./components/search-box/search-box.component.jsx";
-import { Btn } from "./components/btn/btn.components";
+import { Dropdown } from "./dropdown/dropdown.component.jsx";
+// import { Btn } from "./components/btn/btn.components.jsx.b";
 
 class App extends Component {
   constructor() {
@@ -11,6 +12,8 @@ class App extends Component {
     this.state = {
       api: [],
       searchField: "",
+      number: 47,
+      fruit: "Apple",
     };
   }
 
@@ -29,29 +32,45 @@ class App extends Component {
   // console.log(this.state.api);
   // }
 
-  handleChange = (e) => {
-    this.setState({ searchField: e.target.value });
+  handleClick = () => {
+    this.setState((prevState, prevProps) => {
+      return { number: prevState.number + 1 };
+    });
   };
 
-  handleClick = (e) => console.log(e);
+  handleChange = (e) => {
+    this.setState({ fruit: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    // console.log(e);
+    this.setState({ fruit: e.target.value });
+  };
+
+  // this.setState({ number: this.state.number + 1 }, () =>
+  // console.log(this.state.number)
+  // );
+  // console.log(this.state.number);
 
   render() {
-    const { api, searchField } = this.state;
-    const filteredUsers = api.filter((user) =>
-      user.name.toLowerCase().includes(searchField.toLowerCase())
-    );
+    // const { api, searchField } = this.state;
+    // const filteredUsers = api.filter((user) =>
+    // user.name.toLowerCase().includes(searchField.toLowerCase())
+    // );
     // const filteredUsers = api;
     // console.log(filteredUsers);
 
     return (
       <div className="App">
-        <Btn type="button" handleClick={this.handleClick} />
+        <button onClick={this.handleClick}>Update State</button>
         <SearchBox
           type="search"
           placeholder="Search Users"
           handleChange={this.handleChange}
         />
-        <CardList api={filteredUsers} />
+        <Dropdown value={this.state.fruit} handleChange={this.handleChange} />
+        {/* <CardList api={filteredUsers} /> */}
+        <h1>{this.state.fruit}</h1>
       </div>
     );
   }
